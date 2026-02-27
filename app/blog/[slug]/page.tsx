@@ -1,8 +1,21 @@
 import fs from 'fs/promises';
 import path from 'path';
+import type { Metadata } from 'next';
 import matter from 'gray-matter';
-import { marked } from 'marked';
- 
+import { Marked } from 'marked';
+import hljs from 'highlight.js';
+
+const marked = new Marked();
+marked.use({
+  renderer: {
+    code({ text, lang }: { text: string; lang?: string }) {
+      const language = lang && hljs.getLanguage(lang) ? lang : 'plaintext';
+      const highlighted = hljs.highlight(text, { language }).value;
+      const langClass = lang ? ` language-${lang}` : '';
+      return `<pre><code class="hljs${langClass}">${highlighted}</code></pre>\n`;
+    },
+  },
+});
 
 interface BlogPostProps {
   params: {
@@ -10,21 +23,31 @@ interface BlogPostProps {
   };
 }
 
-async function getBlogPost(slug: string): Promise<{ title: string; html: string; } | null> {
-  const blogsDirectory = path.join(process.cwd(), 'content/blogs');
-  const filePath = path.join(blogsDirectory, `${slug}.md`);
+const blogsDirectory = path.join(process.cwd(), 'content/blogs');
 
+async function getBlogMeta(slug: string): Promise<{ title: string; description?: string } | null> {
+  const filePath = path.join(blogsDirectory, `${slug}.md`);
+  try {
+    const fileContents = await fs.readFile(filePath, 'utf8');
+    const { data } = matter(fileContents);
+    return {
+      title: data.title || 'No Title',
+      description: data.description,
+    };
+  } catch {
+    return null;
+  }
+}
+
+async function getBlogPost(slug: string): Promise<{ title: string; html: string } | null> {
+  const filePath = path.join(blogsDirectory, `${slug}.md`);
   try {
     const fileContents = await fs.readFile(filePath, 'utf8');
     const { data, content } = matter(fileContents);
-
-    // Ensure marked is used correctly
-    const html = await marked(content);
-
+    const html = await marked.parse(content);
     return {
       title: data.title || 'No Title',
-      
-      html: html,
+      html,
     };
   } catch (error) {
     console.error(`Error reading or parsing blog post ${slug}:`, error);
@@ -32,8 +55,19 @@ async function getBlogPost(slug: string): Promise<{ title: string; html: string;
   }
 }
 
+export async function generateMetadata({ params }: BlogPostProps): Promise<Metadata> {
+  const meta = await getBlogMeta(params.slug);
+  if (!meta) return { title: '文章未找到' };
+  return {
+    title: meta.title,
+    ...(meta.description && {
+      description: meta.description,
+      openGraph: { title: meta.title, description: meta.description },
+    }),
+  };
+}
+
 export async function generateStaticParams() {
-  const blogsDirectory = path.join(process.cwd(), 'content/blogs');
   const filenames = await fs.readdir(blogsDirectory);
 
   return filenames.map(filename => ({

@@ -28,17 +28,17 @@ async function getBlogPosts(): Promise<BlogPost[]> {  // Create an async functio
         title: data.title,
         excerpt: data.excerpt || '',
         slug: filename.replace(/\.md$/, ''),
-        date : data.date 
+        date: data.date ?? '',
 
       };
     })
   );
 
-    // 根据日期排序（降序）
+    // 根据日期排序（降序），无日期的排到最后
     blogs.sort((a, b) => {
-      const dateA = new Date(a.date);
-      const dateB = new Date(b.date);
-      return dateB.getTime() - dateA.getTime(); // 降序排序
+      const dateA = a.date ? new Date(a.date).getTime() : 0;
+      const dateB = b.date ? new Date(b.date).getTime() : 0;
+      return dateB - dateA;
     });
 
   return blogs;
@@ -59,14 +59,28 @@ export default async function Home() {
                 hover:shadow-lg transition-shadow duration-200
                 bg-white"
             >
-              <h3 className="text-xl md:text-2xl font-semibold mb-2 md:mb-3">
-                <a 
-                  href={`/blog/${post.slug}`} 
-                  className="hover:underline hover:text-blue-600 transition-colors duration-200"
-                >
-                  {post.title}
-                </a>
-              </h3>
+              <div className="flex flex-wrap items-baseline gap-2 mb-2 md:mb-3">
+                {post.date && (
+                  <time
+                    dateTime={post.date}
+                    className="text-xs md:text-sm text-gray-500 shrink-0"
+                  >
+                    {new Date(post.date).toLocaleDateString('zh-CN', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
+                  </time>
+                )}
+                <h3 className="text-xl md:text-2xl font-semibold min-w-0">
+                  <a 
+                    href={`/blog/${post.slug}`} 
+                    className="hover:underline hover:text-blue-600 transition-colors duration-200"
+                  >
+                    {post.title}
+                  </a>
+                </h3>
+              </div>
               <p className="text-sm md:text-base text-gray-700 leading-relaxed">
                 {post.excerpt}
               </p>

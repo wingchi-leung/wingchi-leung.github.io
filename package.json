@@ -5,7 +5,7 @@
 
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/generate-static-seo.js && next build",
     "start": "next start",
     "lint": "next lint",
     "export": "next export",
@@ -54,6 +54,8 @@
     "eslint": "8.49.0",
     "eslint-config-next": "13.5.1",
     "gray-matter": "^4.0.3",
+    "highlight.js": "^11.10.0",
+    "marked-highlight": "^2.1.0",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.446.0",
     "marked": "^15.0.7",

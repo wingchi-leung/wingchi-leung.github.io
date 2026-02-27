@@ -1,9 +1,24 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import Navigation from '@/components/Navigation';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.URL || 'https://your-site.netlify.app';
+
 export const metadata: Metadata = {
-  title: "Blog | 路边广播",
-  description: 'Street Blog',
+  title: { default: 'Blog | 路边广播', template: '%s | 路边广播' },
+  description: '路边广播 - 个人博客，记录与分享',
+  openGraph: {
+    title: 'Blog | 路边广播',
+    description: '路边广播 - 个人博客，记录与分享',
+    url: siteUrl,
+    siteName: '路边广播',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog | 路边广播',
+    description: '路边广播 - 个人博客，记录与分享',
+  },
+  alternates: { canonical: siteUrl },
 };
 
 export default function RootLayout({
