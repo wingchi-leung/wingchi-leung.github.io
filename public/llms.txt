@@ -1,0 +1,15 @@
+# 路边广播
+
+> 个人博客，记录与分享
+
+## 博客
+- [Agent101：从概念到代码理解Agent](https://your-site.netlify.app/blog/Agent101): Agent101：从概念到代码理解Agent
+- [深入了解Claude Skills：AI技能扩展的新方式](https://your-site.netlify.app/blog/Claude-Skill101): 深入了解Claude Skills：AI技能扩展的新方式
+- [Google lab开放的小产品](https://your-site.netlify.app/blog/google-ai-labs): Google lab开放的小产品
+- [深入浅出langgraph（一）](https://your-site.netlify.app/blog/langgraph_tutorial_01): 深入浅出langgraph（一）
+- [NextJS终极手册](https://your-site.netlify.app/blog/nextJs-full-note): NextJS终极手册
+- [OpenManus技术浅析](https://your-site.netlify.app/blog/openmanus): OpenManus技术浅析
+- [产品拆解（一）ADIS系统的设计](https://your-site.netlify.app/blog/PM-practice-ADIS): 产品拆解（一）ADIS系统的设计
+
+## Optional
+- [首页](https://your-site.netlify.app): 博客列表
