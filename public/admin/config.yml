@@ -1,7 +1,8 @@
+# 部署到 GitHub Pages 时请使用 github 后端；Netlify 可用 git-gateway
 backend:
-  name:  git-gateway # 或者 github, bitbucket, gitea, etc.
-  repo: wingchi-leung/blog # 你的 Git 仓库
-  branch: main # 或者 master，你想要编辑的分支
+  name: github
+  repo: wingchi-leung/wingchi-website   # 改成你的 GitHub 仓库：用户名/仓库名
+  branch: main
 
 media_folder: "public/img" # 保存上传的图片的位置，相对于 public 目录
 public_folder: "/img" # 访问图片的公共 URL 路径

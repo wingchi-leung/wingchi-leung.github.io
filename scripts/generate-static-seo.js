@@ -1,13 +1,13 @@
 /**
  * 构建时生成静态 SEO 文件，不依赖运行时执行代码。
  * 输出：public/sitemap.xml, public/robots.txt, public/llms.txt
- * 新增文章后重新 npm run build 会自动更新；Netlify 部署时设置 NEXT_PUBLIC_SITE_URL 可替换占位 URL。
+ * 新增文章后重新 npm run build 会自动更新；GitHub Actions 会设置 NEXT_PUBLIC_SITE_URL；本地/Netlify 可手动设置以替换占位 URL。
  */
 const fs = require('fs');
 const path = require('path');
 const matter = require('gray-matter');
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.URL || 'https://your-site.netlify.app';
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.URL || 'https://your-username.github.io';
 const siteName = '路边广播';
 const siteDescription = '个人博客，记录与分享';
 

@@ -39,12 +39,34 @@ async function getBlogMeta(slug: string): Promise<{ title: string; description?:
   }
 }
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
+// 将 Obsidian 语法 ![[文件名.png]] 转为标准 Markdown 图片，图床目录 /blog_asset
+function normalizeMarkdownImages(content: string): string {
+  return content.replace(/!\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g, (_, filename) => {
+    const name = filename.trim();
+    const src = name.startsWith('http')
+      ? name
+      : `${basePath}/blog_asset/${name.split('/').map(encodeURIComponent).join('/')}`;
+    const alt = name.split('/').pop() || name;
+    return `![${alt}](${src})`;
+  });
+}
+
+// 为文章 HTML 中的 /blog_asset/ 路径加上 basePath（部署在 GitHub Pages 子路径时用）
+function rewriteAssetPaths(html: string): string {
+  if (!basePath) return html;
+  return html.replace(/(\s)(src|href)="\/blog_asset\//g, `$1$2="${basePath}/blog_asset/`);
+}
+
 async function getBlogPost(slug: string): Promise<{ title: string; html: string } | null> {
   const filePath = path.join(blogsDirectory, `${slug}.md`);
   try {
     const fileContents = await fs.readFile(filePath, 'utf8');
     const { data, content } = matter(fileContents);
-    const html = await marked.parse(content);
+    const normalizedContent = normalizeMarkdownImages(content);
+    let html = await marked.parse(normalizedContent);
+    html = rewriteAssetPaths(html);
     return {
       title: data.title || 'No Title',
       html,
