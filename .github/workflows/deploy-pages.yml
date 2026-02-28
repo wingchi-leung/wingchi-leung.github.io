@@ -29,11 +29,19 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # 用户站 (xxx.github.io) 部署在根路径，无 basePath；项目站为 https://<owner>.github.io/<repo>/
+      # 用户站 (xxx.github.io) 必须 basePath 为空，否则资源会变成 /repo名/_next/... 导致 404
+      - name: Set basePath and site URL for GitHub Pages
+        id: pages-env
+        run: |
+          if [ "${{ github.event.repository.name }}" = "${{ github.repository_owner }}.github.io" ]; then
+            echo "NEXT_PUBLIC_BASE_PATH=" >> $GITHUB_ENV
+            echo "NEXT_PUBLIC_SITE_URL=https://${{ github.repository_owner }}.github.io" >> $GITHUB_ENV
+          else
+            echo "NEXT_PUBLIC_BASE_PATH=/${{ github.event.repository.name }}" >> $GITHUB_ENV
+            echo "NEXT_PUBLIC_SITE_URL=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}" >> $GITHUB_ENV
+          fi
+
       - name: Build
-        env:
-          NEXT_PUBLIC_SITE_URL: ${{ github.event.repository.name == format('{0}.github.io', github.repository_owner) && format('https://{0}.github.io', github.repository_owner) || format('https://{0}.github.io/{1}', github.repository_owner, github.event.repository.name) }}
-          NEXT_PUBLIC_BASE_PATH: ${{ github.event.repository.name == format('{0}.github.io', github.repository_owner) && '' || format('/{0}', github.event.repository.name) }}
         run: npm run build
 
       # 让 GitHub Pages 跳过 Jekyll，否则会忽略 _next 目录导致 CSS/JS 无法加载
