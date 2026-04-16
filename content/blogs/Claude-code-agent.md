@@ -1,9 +1,88 @@
 ---
-title: "Agent开发中的零散笔记"
-date: "2026-03-11"
- 
+title: 基于Claude Code学Agent
+date: 2026-03-11
 ---
- 
+### Claude Code是怎么工作的
+
+让你给claude code一个任务的时候，它会跑一个循环：
+- 收集上下文
+- 采取行动
+- 验证结果 
+直到完成任务为止 ，当然，在这个过程中你可以随时打断它。 这个过程有一个高级点的名称，叫做 agentic loop. 
+
+![[Pasted image 20260321133630.png]] 
+
+agentic loop里面由两个组件驱动：推理模型和行动需要的工具。
+
+### Subagent
+
+Claude Code的subagent是个很好用的功能，它解决了agent工作中的大难题：长上下文管理。
+
+大家都知道agent运行久了，上下文挤爆了模型窗口之后，agent的工作质量就会急剧下降。 subagent 有一个很大的点就是他有独立的上下文窗口，在工作中不需要占用主agent的空间，只需要在运行后将结果返回给主agent。 
+
+另外，每个subagent还可以有：
+- 自定义的系统提示词
+- 独立的工具访问权限，**你可以限制subagent可选的工具**
+- 可以将
+
+也就是subagent能够独立完成自己的目标。
+
+claude code内置了几个subagents，会在适当的时候自动被调用起来。
+- explore ： 一个快速的、只读的代理，针对搜索和分析代码库进行了优化。 
+- plan： 在 [plan mode](https://code.claude.com/docs/zh-CN/common-workflows#use-plan-mode-for-safe-code-analysis) 期间用于在呈现计划之前收集上下文的研究代理。
+- general-purpose: 一个能够处理复杂、多步骤任务的代理，这些任务需要探索和操作。 
+
+
+#### subagent的类型
+
+subagents其实也是带有 yaml 格式的md文件（和skills有点类似），不同的项目可能会把他们放在不同的位置的，
+例如，放在电脑根目录下的 `~/.claude/agents/` 是全局级别的subagent，所有项目都可以用。
+放在项目文件夹下的 :  `.claude/agents/`, 就仅限于该代码库下使用。
+
+还有**CLI 定义的 subagents** ， 在启动 Claude Code 时作为 JSON 传递。它们仅存在于该会话中，不会保存到磁盘，使其对快速测试或自动化脚本很有用：
+``` bash
+claude --agents '{
+  "code-reviewer": {
+    "description": "Expert code reviewer. Use proactively after code changes.",
+    "prompt": "You are a senior code reviewer. Focus on code quality, security, and best practices.",
+    "tools": ["Read", "Grep", "Glob", "Bash"],
+    "model": "sonnet"
+  }
+}'
+```
+
+
+####  如何创建subagent
+Subagent 文件使用 YAML frontmatter 进行配置，后跟 Markdown 中的系统提示： 
+
+例如一个代码评审的subagent 示例如下 ：
+```markdown 
+---
+name: code-reviewer
+description: Reviews code for quality and best practices
+tools: Read, Glob, Grep
+model: sonnet
+---
+
+You are a code reviewer. When invoked, analyze the code and provide
+specific, actionable feedback on quality, security, and best practices.
+```
+
+从这里可以看出，subagent还可以选择其他模型，说明一些简单的任务交给subagent后，也可以选择比较便宜或者更加专注的模型来完成任务。 
+
+
+https://code.claude.com/docs/zh-CN/sub-agents#%E5%86%85%E7%BD%AE-subagents
+
+### Claude Code的插件
+
+插件Plugin是Claude Code最高级别的拓展，可以将自定义命令，subagent，mcp，hook，skills都打包在一起，方便团队多用户中的共享协作和分发。
+
+简单来说，插件就是将claude code拓展能力的工具箱打包在一起，使用了插件就不需要每个项目都重复配置了。
+
+
+
+
+
 
 # 多Agent架构
 
