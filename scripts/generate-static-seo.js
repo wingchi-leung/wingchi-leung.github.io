@@ -39,7 +39,7 @@ const sitemapUrls = [
   { url: baseUrl, lastmod: new Date().toISOString().slice(0, 10), priority: '1.0', changefreq: 'weekly' },
   ...posts.map((p) => ({
     url: `${baseUrl}/blog/${p.slug}`,
-    lastmod: (p.date && p.date.slice(0, 10)) || new Date().toISOString().slice(0, 10),
+    lastmod: (p.date && new Date(p.date).toISOString().slice(0, 10)) || new Date().toISOString().slice(0, 10),
     priority: '0.8',
     changefreq: 'weekly',
   })),
