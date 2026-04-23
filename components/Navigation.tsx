@@ -21,20 +21,6 @@ export default function Navigation() {
         backgroundColor: 'rgb(250,249,245)',
       }}
     >
-      {/* <img
-        src="/bigjump.jpg" // 替换为你的图片路径
-        alt="Profile"
-        style={{
-          width: '100px', // 调整图片大小
-          height: '100px', // 调整图片大小
-          borderRadius: '50%', // 设置为圆形
-          marginLeft: '20px',  
-          marginRight: '20px', 
-          animation: 'rotate 50s linear infinite', // 添加旋转动画
-          animationDelay: '0s', // 添加 animation-delay 属性
-
-        }}
-      /> */}
       <div
         className="flex flex-col items-center md:flex-row md:justify-center w-full"
       >
