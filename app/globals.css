@@ -201,9 +201,9 @@
 /* 头像提示框 - 微妙的交互提示 */
 .avatar-tooltip {
   position: absolute;
-  bottom: 100%;
+  top: 100%;
   left: 50%;
-  transform: translateX(-50%) translateY(-10px);
+  transform: translateX(-50%) translateY(10px);
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
@@ -211,6 +211,7 @@
 }
 
 .tooltip-text {
+  position: relative;
   display: block;
   padding: 6px 12px;
   background-color: rgba(91, 75, 38, 0.9);
@@ -219,16 +220,17 @@
   border-radius: 6px;
   white-space: nowrap;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 101;
 }
 
 .tooltip-text::after {
   content: '';
   position: absolute;
-  top: 100%;
+  bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
   border: 5px solid transparent;
-  border-top-color: rgba(91, 75, 38, 0.9);
+  border-bottom-color: rgba(91, 75, 38, 0.9);
 }
 
 /* ========== 动画效果 ========== */
