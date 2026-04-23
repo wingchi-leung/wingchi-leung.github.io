@@ -70,3 +70,32 @@ CMD  # 构建镜像时运行的指令
 
 ```
 
+### Docker Compose 
+
+Docker Compose 是一个管理多容器的工具。对Docker进行补充，有了Docker Compose ，开发者可以管理多容器之间的复杂关系和部署。
+
+Docker Compose 用 docker-compose.yml 来描述多个容器之间的服务，网络和依赖，然后一次性启动所有服务。
+
+适用场景 ：
+- Docker 适合需要独立运行某个容器的场景，比如快速测试或搭建开发环境
+- Docker Compose 更加适合微服务架构或多组件的场景，比如一个web服务器，数据库和缓存组成的应用
+
+
+例如，在Docker启动一个nginx容器，暴露在端口80.
+`docker run -d -p 80:80 nginx`
+
+在Docker Compose 运行nginx和mysql服务，并定义他们的环境和端口映射：
+```yaml
+version: '3'
+services: 
+	web: 
+		image:nginx
+		ports:
+			- "80:80"
+db:
+	image: mysql
+	environment:
+		MYSQL_ROOT_PASSWORD:example
+```
+
+
