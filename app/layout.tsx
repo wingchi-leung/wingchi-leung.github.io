@@ -1,7 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import Navigation from '@/components/Navigation';
-import RotatingAvatar from '@/components/RotatingAvatar';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.URL || 'https://your-username.github.io';
 
 export const metadata: Metadata = {
@@ -33,8 +32,6 @@ export default function RootLayout({
       <link rel="icon" href="/favicon.png" type="image/png" />
       </head>
       <body style={{ position: 'relative' }}>
-          {/* 旋转头像（仅首页显示） */}
-      <RotatingAvatar />
           {/* GitHub 图标 */}
       <a
         href="https://github.com/wingchi-leung" // 替换为你的 GitHub 链接
