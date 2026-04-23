@@ -202,35 +202,37 @@
 .avatar-tooltip {
   position: absolute;
   top: 100%;
-  left: 50%;
-  transform: translateX(-50%) translateY(10px);
+  left: 0;
+  transform: translateY(10px);
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
   z-index: 100;
+  margin-top: 5px;
 }
 
 .tooltip-text {
   position: relative;
   display: block;
-  padding: 6px 12px;
-  background-color: rgba(91, 75, 38, 0.9);
+  padding: 8px 14px;
+  background-color: rgba(91, 75, 38, 0.95);
   color: #fff;
   font-size: 12px;
   border-radius: 6px;
   white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   z-index: 101;
+  width: fit-content;
 }
 
 .tooltip-text::after {
   content: '';
   position: absolute;
   bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 5px solid transparent;
-  border-bottom-color: rgba(91, 75, 38, 0.9);
+  left: 30px;
+  transform: none;
+  border: 6px solid transparent;
+  border-bottom-color: rgba(91, 75, 38, 0.95);
 }
 
 /* ========== 动画效果 ========== */
@@ -274,7 +276,7 @@
 .avatar-container:hover .avatar-tooltip {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
 }
 
 .avatar-container:hover .avatar-glow {
