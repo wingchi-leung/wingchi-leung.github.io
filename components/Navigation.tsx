@@ -2,6 +2,7 @@
 
 import '../app/globals.css';
 import localFont from 'next/font/local'
+import RotatingAvatar from './RotatingAvatar';
 
 const bubbleboddy = localFont({
   src: '../public/fonts/bubble-inlie.ttf',
@@ -22,8 +23,13 @@ export default function Navigation() {
       }}
     >
       <div
-        className="flex flex-col items-center md:flex-row md:justify-center w-full"
+        className="flex flex-col items-center md:flex-row md:justify-center w-full relative"
       >
+        {/* 头像容器 */}
+        <div className="nav-avatar">
+          <RotatingAvatar />
+        </div>
+        
         <div
           className={`text-4xl md:text-6xl font-bold text-center mb-4 md:mb-0 ${bubbleboddy.className}`}
           style={{

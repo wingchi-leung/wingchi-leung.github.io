@@ -10,17 +10,19 @@ export default function RotatingAvatar() {
   }
 
   return (
-    <img
-      src="/bigjump.jpg"
-      alt="Profile"
-      className="fixed top-4 left-4 md:top-6 md:left-6 z-10"
-      style={{
-        width: '80px',
-        height: '80px',
-        borderRadius: '50%',
-        objectFit: 'cover',
-        animation: 'rotate 30s linear infinite',
-      }}
-    />
+    <div className="avatar-container">
+      <div className="avatar-glow"></div>
+      <div className="avatar-wrapper">
+        <img
+          src="/bigjump.jpg"
+          alt="Profile"
+          className="avatar-image"
+        />
+        <div className="avatar-border"></div>
+      </div>
+      <div className="avatar-tooltip">
+        <span className="tooltip-text">👋 你好，我是 Wingchi</span>
+      </div>
+    </div>
   );
 }
