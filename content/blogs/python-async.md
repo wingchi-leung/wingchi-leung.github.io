@@ -178,6 +178,8 @@ if __name__ == "__main__":
 不写 `async def` 的话，调用就会立刻执行；写成 `async def` 后，调用得到的是一个「协程对象」，要交给 `asyncio.run()` 或在里面 `await` 才会真正执行。`asyncio.run(main())` 会帮你把事件循环拉起来、把 `main()` 跑完、再关掉循环。
 
 
+
+
 **第二段：多个协程一起跑**
 
 ```python
