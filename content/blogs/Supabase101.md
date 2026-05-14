@@ -1,3 +1,9 @@
+---
+title: "supabase 开发"
+date: "2026-05-11"
+---
+
+
 ### Supabase 介绍  
 Supabase 是个开源的Backend As Service 后端即服务。
 
@@ -18,22 +24,23 @@ Supabase 是个开源的Backend As Service 后端即服务。
 
 授权的API调用是指服务端能够识别出API调用者的身份，反之就是匿名调用
 
-这里有一个问题就是，因为BaaS没有中间的后端服务层，API Key只能配置到前段服务商，相当于这个API Key是公开的，任何人都可以看到。 那么应该怎么设计API key的安全呢？
+这里有一个问题就是，因为BaaS没有中间的后端服务层，API Key只能配置到前端服务商，相当于这个API Key是公开的，任何人都可以看到。 那么应该怎么设计API key的安全呢？
 
 **区分**：要区分匿名API调用和未登录API的调用
 
 
 数据层上需要考虑的问题： 
 -  public 数据是否允许匿名api调用？ 是否允许未登录用户访问？ 如何鉴权？
-- BaaS服务间的数据互相访问：BaaS的Auth服务可能需要读写User表，如何保证Auth服务可以访问User表的时候，保证Auth接口不会任意篡改User表？ 
+-  BaaS服务内的数据互相访问：BaaS的Auth服务可能需要读写User表，如何保证Auth服务可以访问User表的时候，保证Auth接口不会任意篡改User表？ 
 
 
 **Supabase的解决方案**
 
 给API调用分了两种key： anon key 和 service key 
 
-- anon key：公开的key，给app用，所有人可以拿到，所以anon key的权限是受限的
+- anon key：公开的key，给app用，所有人可以拿到，所以anon key的权限是受限的。一般anon（匿名）用户拥有的是最低的数据访问权限。通常不能访问任何数据。
 - service key: 使用service key 调用api可以做任何事情，不受限制，因此service key只能配置给BAAS内部服务使用，这些服务是服务商自己开发的，所以是授信的 
+
 
 ### 核心特性
 
@@ -49,7 +56,7 @@ supabase 使用了RLS的方案，同时提供了三种角色： anon、authentic
 
 - anon是用户未登录时使用的role。  
 - authenticated是用户登录后进行数据操作时使用的role。  
-- service_role是供其他服务使用的role，可以绕过RLS（感觉不是程序实现的，需要在创建这个role时设置为BYPASSRLS，从而RLS对该role不起作用） 
+- service_role是供其他服务使用的role，可以绕过RLS（ 需要在创建这个role时设置为BYPASSRLS，从而RLS对该role不起作用） 
 
 
 
