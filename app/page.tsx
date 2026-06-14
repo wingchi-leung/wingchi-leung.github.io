@@ -51,19 +51,18 @@ export default async function Home() {
   return (
     <div className="min-h-screen px-4 md:px-8 lg:px-16 max-w-screen-xl mx-auto">
       <section className="mb-20">
-        <div className="grid gap-6">
+        <div className="divide-y divide-gray-200">
           {blogs && blogs.map((post) => (
-            <div 
-              key={post.slug} 
-              className="border-2 border-black rounded-lg p-4 md:p-6 
-                hover:shadow-lg transition-shadow duration-200
-                bg-white"
+            <a 
+              key={post.slug}
+              href={`/blog/${post.slug}`}
+              className="block group py-5 md:py-6 transition-colors duration-200 hover:bg-[rgb(245,243,238)] -mx-4 md:-mx-8 lg:-mx-16 px-4 md:px-8 lg:px-16"
             >
-              <div className="flex flex-wrap items-baseline gap-2 mb-2 md:mb-3">
+              <div className="flex flex-wrap items-baseline gap-3 mb-1.5">
                 {post.date && (
                   <time
                     dateTime={post.date}
-                    className="text-xs md:text-sm text-gray-500 shrink-0"
+                    className="text-xs md:text-sm text-gray-400 shrink-0 group-hover:text-[rgb(130,115,98)] transition-colors duration-200"
                   >
                     {new Date(post.date).toLocaleDateString('zh-CN', {
                       year: 'numeric',
@@ -72,19 +71,16 @@ export default async function Home() {
                     })}
                   </time>
                 )}
-                <h3 className="text-xl md:text-2xl font-semibold min-w-0">
-                  <a 
-                    href={`/blog/${post.slug}`} 
-                    className="hover:underline hover:text-blue-600 transition-colors duration-200"
-                  >
-                    {post.title}
-                  </a>
+                <h3 className="text-lg md:text-xl font-medium min-w-0 text-gray-800 group-hover:text-[rgb(130,115,98)] transition-colors duration-200">
+                  {post.title}
                 </h3>
               </div>
-              <p className="text-sm md:text-base text-gray-700 leading-relaxed">
-                {post.excerpt}
-              </p>
-            </div>
+              {post.excerpt && (
+                <p className="text-sm text-gray-500 leading-relaxed max-w-2xl">
+                  {post.excerpt}
+                </p>
+              )}
+            </a>
           ))}
         </div>
       </section>
