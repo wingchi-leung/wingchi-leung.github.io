@@ -77,16 +77,20 @@ function extractToc(content: string): TocItem[] {
     const m = line.match(/^(#{2,3})\s+(.+)$/);
     if (!m) continue;
     const level = m[1].length;
-    const rawText = m[2].replace(/#+\s*$/, '').trim();
-    const text = rawText.replace(/\*+|\_+/g, '').trim();
+    const text = m[2].trim();
     let id = slugify(text);
-    const n = (idCount.get(id) ?? 0) + 1;
-    idCount.set(id, n);
-    if (n > 1) id = `${id}-${n - 1}`;
+    if (idCount.has(id)) {
+      idCount.set(id, idCount.get(id)! + 1);
+      id = `${id}-${idCount.get(id)}`;
+    } else {
+      idCount.set(id, 1);
+    }
     toc.push({ level, text, id });
   }
   return toc;
 }
+
+
 
 const marked = new Marked();
 marked.use({
@@ -100,7 +104,7 @@ marked.use({
   },
 });
 
-async function getBlogPost(slug: string): Promise<{ title: string; html: string; toc: TocItem[] } | null> {
+async function getBlogPost(slug: string): Promise<{ title: string; date: string; tags: string[]; html: string; toc: TocItem[] } | null> {
   const filePath = path.join(blogsDirectory, `${slug}.md`);
   try {
     const fileContents = await fs.readFile(filePath, 'utf8');
@@ -119,6 +123,8 @@ async function getBlogPost(slug: string): Promise<{ title: string; html: string;
     html = rewriteAssetPaths(html);
     return {
       title: data.title || 'No Title',
+      date: data.date || '',
+      tags: data.tags || [],
       html,
       toc,
     };
@@ -176,7 +182,35 @@ export default async function BlogPost({ params }: BlogPostProps) {
         }
       >
         <article>
-          <h1 className="text-2xl md:text-4xl font-bold mb-6">{post.title}</h1>
+          <h1 className="text-2xl md:text-4xl font-bold mb-2">{post.title}</h1>
+          {/* 文章元信息：日期 + 标签 */}
+          <div className="flex flex-wrap items-center gap-3 mb-6 text-sm text-gray-400">
+            {post.date && (
+              <time dateTime={post.date}>
+                {new Date(post.date).toLocaleDateString('zh-CN', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </time>
+            )}
+            {post.tags && post.tags.length > 0 && (
+              <div className="flex flex-wrap gap-1.5">
+                {post.tags.map((tag) => (
+                  <a
+                    key={tag}
+                    href={`/tags/${encodeURIComponent(tag)}`}
+                    className="inline-block text-xs px-2 py-0.5 rounded-full
+                               bg-[rgb(130,115,98)]/10 text-[rgb(130,115,98)]
+                               hover:bg-[rgb(130,115,98)]/20 hover:-translate-y-0.5
+                               transition-all duration-200"
+                  >
+                    {tag}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
           {/* 小屏：标题下方内联可折叠目录 */}
           {post.toc.length > 0 && (
             <div className="mb-6 max-w-md lg:hidden">

@@ -1,6 +1,7 @@
 ---
 title: "深入了解Claude Skills：AI技能扩展的新方式"
 date: "2025-11-06"
+tags: ["AI", "Claude", "Skills"]
 ---
 
 

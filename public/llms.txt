@@ -3,14 +3,22 @@
 > 个人博客，记录与分享
 
 ## 博客
-- [Agent101：从概念到代码理解Agent](https://your-username.github.io/blog/Agent101): Agent101：从概念到代码理解Agent
+- [基于Claude Code学Agent](https://your-username.github.io/blog/Claude-code-agent): 基于Claude Code学Agent
 - [深入了解Claude Skills：AI技能扩展的新方式](https://your-username.github.io/blog/Claude-Skill101): 深入了解Claude Skills：AI技能扩展的新方式
+- [Cloudflare 全家桶实战](https://your-username.github.io/blog/Cloudflare-learn): Cloudflare 全家桶实战
+- [DevOp学习](https://your-username.github.io/blog/DevOp): DevOp学习
 - [Google lab开放的小产品](https://your-username.github.io/blog/google-ai-labs): Google lab开放的小产品
 - [深入浅出langgraph（一）](https://your-username.github.io/blog/langgraph_tutorial_01): 深入浅出langgraph（一）
+- [MCP技术实现和应用实战](https://your-username.github.io/blog/MCP101): MCP技术实现和应用实战
 - [NextJS终极手册](https://your-username.github.io/blog/nextJs-full-note): NextJS终极手册
 - [OpenManus技术浅析](https://your-username.github.io/blog/openmanus): OpenManus技术浅析
 - [产品拆解（一）ADIS系统的设计](https://your-username.github.io/blog/PM-practice-ADIS): 产品拆解（一）ADIS系统的设计
 - [深入浅出Python 异步与协程](https://your-username.github.io/blog/python-async): 深入浅出Python 异步与协程
+- [RAG开发的零散笔记](https://your-username.github.io/blog/RAG101): RAG开发的零散笔记
+- [文章](https://your-username.github.io/blog/SeekHarness开发札记): 文章
+- [supabase 开发](https://your-username.github.io/blog/Supabase101): supabase 开发
+- [搞懂Transformer](https://your-username.github.io/blog/Transformer101): 搞懂Transformer
+- [KV Cache 与 Prefill —— 大模型推理加速的核心](https://your-username.github.io/blog/Transformer102): KV Cache 与 Prefill —— 大模型推理加速的核心
 
 ## Optional
 - [首页](https://your-username.github.io): 博客列表

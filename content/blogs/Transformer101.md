@@ -1,6 +1,7 @@
 ---
 title: 搞懂Transformer 
 date: 2026-06-09
+tags: ["AI", "Transformer", "Deep Learning"]
 ---
 
 ### Transformer之前 

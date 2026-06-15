@@ -1,6 +1,7 @@
 ---
 title: 基于Claude Code学Agent
 date: 2026-03-11
+tags: ["AI", "Agent", "Claude"]
 ---
 ### Claude Code是怎么工作的
 

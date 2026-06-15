@@ -1,6 +1,7 @@
 ---
 title: "Google lab开放的小产品"
 date: "2025-03-29"
+tags: ["AI", "Google"]
  
 ---
 

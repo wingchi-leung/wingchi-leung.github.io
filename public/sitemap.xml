@@ -1,56 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://wingchi-leung.github.io</loc>
-    <lastmod>2026-02-28</lastmod>
+    <loc>https://your-username.github.io</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://wingchi-leung.github.io/blog/Agent101</loc>
-    <lastmod>2025-03-28</lastmod>
+    <loc>https://your-username.github.io/blog/Claude-code-agent</loc>
+    <lastmod>2026-03-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wingchi-leung.github.io/blog/Claude-Skill101</loc>
+    <loc>https://your-username.github.io/blog/Claude-Skill101</loc>
     <lastmod>2025-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wingchi-leung.github.io/blog/google-ai-labs</loc>
+    <loc>https://your-username.github.io/blog/Cloudflare-learn</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://your-username.github.io/blog/DevOp</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://your-username.github.io/blog/google-ai-labs</loc>
     <lastmod>2025-03-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wingchi-leung.github.io/blog/langgraph_tutorial_01</loc>
+    <loc>https://your-username.github.io/blog/langgraph_tutorial_01</loc>
     <lastmod>2026-02-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wingchi-leung.github.io/blog/nextJs-full-note</loc>
+    <loc>https://your-username.github.io/blog/MCP101</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://your-username.github.io/blog/nextJs-full-note</loc>
     <lastmod>2025-03-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wingchi-leung.github.io/blog/openmanus</loc>
-    <lastmod>2025-3-31</lastmod>
+    <loc>https://your-username.github.io/blog/openmanus</loc>
+    <lastmod>2025-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wingchi-leung.github.io/blog/PM-practice-ADIS</loc>
+    <loc>https://your-username.github.io/blog/PM-practice-ADIS</loc>
     <lastmod>2025-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://wingchi-leung.github.io/blog/python-async</loc>
+    <loc>https://your-username.github.io/blog/python-async</loc>
     <lastmod>2026-02-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://your-username.github.io/blog/RAG101</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://your-username.github.io/blog/SeekHarness开发札记</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://your-username.github.io/blog/Supabase101</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://your-username.github.io/blog/Transformer101</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://your-username.github.io/blog/Transformer102</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

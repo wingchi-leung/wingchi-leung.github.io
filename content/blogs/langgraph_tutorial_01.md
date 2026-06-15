@@ -1,6 +1,7 @@
 ---
 title: "深入浅出langgraph（一）"
 date: "2026-02-26"
+tags: ["AI", "LangGraph"]
  
 ---
 

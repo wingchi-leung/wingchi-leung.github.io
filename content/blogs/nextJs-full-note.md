@@ -1,6 +1,7 @@
 ---
 title: "NextJS终极手册"
 date: "2025-03-24"
+tags: ["Next.js", "React"]
 ---
 ### Nextjs介绍&全景地图
 

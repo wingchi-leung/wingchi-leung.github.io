@@ -1,6 +1,7 @@
 ---
 title: "DevOp学习"
 date: "2026-03-11"
+tags: ["DevOps"]
 ---
 ### CICD 
 流水线系统（CICD）中CI代表持续集成，CD代表持续交付 Continuous Delivery/Deployment。 这个系统主要帮助开发团队高效地完成代码编写、测试、部署等一些列过程

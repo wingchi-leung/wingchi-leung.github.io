@@ -1,6 +1,7 @@
 ---
 title: "OpenManus技术浅析"
 date: "2025-3-31"
+tags: ["AI", "Agent"]
  
 ---
 ### Agent开发入门 | OpenManus初探
