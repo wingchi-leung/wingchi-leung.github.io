@@ -10,8 +10,8 @@ tags: ["AI", "Agent", "Claude"]
 - 采取行动
 - 验证结果 
 直到完成任务为止 ，当然，在这个过程中你可以随时打断它。 这个过程有一个高级点的名称，叫做 agentic loop. 
-
-![[Pasted image 20260321133630.png]] 
+ 
+![agenticg](/blog_asset/runtime.png)
 
 agentic loop里面由两个组件驱动：推理模型和行动需要的工具。
 
