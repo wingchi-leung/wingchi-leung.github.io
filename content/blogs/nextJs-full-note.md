@@ -1,9 +1,10 @@
 ---
-title: "NextJS终极手册"
-date: "2025-03-24"
-tags: ["Next.js", "React"]
+title: NextJS终极手册
+date: 2025-03-24
+tags:
+  - React
 ---
-### Nextjs介绍&全景地图
+# Nextjs介绍&全景地图
 
 > 前言：由于笔者是个后端攻城狮，很多地方会以后端来做类比~ 
 
@@ -283,8 +284,175 @@ export default function Page() {
 
 
 
- 
+ # React 
+
+React 是一个UI库，核心思想是 
+
+> UI = f(state)
+	界面 = 函数(状态)
+	即：*你的界面是状态的函数，状态变了，界面自动更新*
+
+### React 的渲染机制
+
+
+## hook
+
+ hook 是一种特殊的函数，允许你把一些react特性钩进来。
+
+> 记住，在js里，值就是函数，函数就是值。 
+
+react 为何要加入hooks
+
+1. 无法在组件之间复用数据处理的逻辑，或者不够直接，例如props或者高阶组件的实现方式
+2. 复杂组件越来越难理解，容易引入bug
+3. Class语法带来复杂性 
+
+### useState 数据驱动界面
+
+
+```javascript
+import React, { useState } from "react";
+
+export default function  Button()  {
+  const  [buttonText, setButtonText] =  useState("Click me,   please");
+
+  function handleClick()  {
+    return setButtonText("Thanks, been clicked!");
+  }
+
+  return  <button  onClick={handleClick}>{buttonText}</button>;
+}
+```
+
+Button 组件是一个函数，内部使用`useState()`钩子引入状态。
+
+`useState()`这个函数接受状态的初始值，作为参数，上例的初始值为按钮的文字。该函数返回一个数组，数组的第一个成员是一个变量（上例是`buttonText`），指向状态的当前值。第二个成员是一个函数，用来更新状态，约定是`set`前缀加上状态的变量名（上例是`setButtonText`）。
+
+
+### 何时需要useState：
+
+useState 是让函数组件具备维持状态（记忆）的能力。
+
+即：在一个函数组件的多次渲染之间，这个 state 是共享的。便于维护状态。
+
+> **当页面上的数据会变化，并且变化后需要重新渲染 UI 时，就应该用 `useState`。**
+
+举个例子： 
+``` js
+function Counter() {
+  let count = 0;
+
+  return (
+    <>
+      <p>{count}</p>
+      <button onClick={() => count++}>
+        +1
+      </button>
+    </>
+  );
+}
+```
+
+你觉得点击以后应该变成：0 1 2 3 4 其实一直都是0 ，因为 React **不会因为普通变量变化而重新渲染页面。**  useState 就是 React 提供的"记忆" 
+
+### useEffect  处理副作用
+
+useEffect 就是处理 *渲染之外的事情*，比如：
+
+- 获取数据
+- 订阅事件 
+- 操作DOM
+- 设置定时器
+
+```javascript
+useEffect(()  =>  {
+  // Async Action
+}, [dependencies])
+```
+
+`useEffect()`接受两个参数。第一个参数是一个函数，异步操作的代码放在里面。第二个参数是一个数组，用于给出 Effect 的依赖项，只要这个数组发生变化，`useEffect()`就会执行。第二个参数可以省略，这时每次组件渲染时，就会执行`useEffect()`。
 
 
 
 
+### useCallBack -- 缓存函数
+
+>`useCallback` 和 `useMemo` 在性能优化方面非常有用。 当我们需要对函数进行性能优化时，可以使用 他们
+
+
+用于缓存函数，以避免重新渲染时的函数重新创建。以一个示例来说明：
+
+
+``` JSX
+import React, { useState, useCallback } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  const handleIncrement = useCallback(() => {
+    setCount(count + 1);
+  }, [count]);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={handleIncrement}>Increment</button>
+    </div>
+  );
+}
+
+```
+
+在以上代码中，我们使用 `useCallback` 缓存了 `handleIncrement` 函数，并将 `count` 作为依赖项传递。这样，在 `count` `改变时，handleIncrement` 函数才会重新创建。由于函数变化往往会导致组件重新渲染，因此使用 `useCallback` 可以避免不必要的重新渲染。
+
+### useMemo -- 缓存计算结果
+
+ 类似useCallback，但它用于缓存值而不是函数。例如：
+
+``` jsx 
+import React, { useMemo } from "react";
+
+function computeExpensiveValue(a, b) {
+  // 一些复杂的计算
+  return a * b;
+}
+
+function MyComponent({ a, b }) {
+  const result = useMemo(() => {
+    return computeExpensiveValue(a, b);
+  }, [a, b]);
+
+  return <p>{result}</p>;
+}
+
+```
+
+使用 `useMemo` 缓存了 `result`，以避免每次重新渲染时重新计算。这在处理复杂计算时可以提高性能。
+
+
+
+### useRef -- 存储不渲染的值 
+
+主要是给了一个可变的容器，改了它不会触发重新渲染，两个主要用途：
+
+1、 拿到DOM元素
+
+2、 存储不需要触发渲染的可变值 
+
+``` js
+// 来自 src/hooks/useDraft.ts
+  const localTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const remoteTimer = useRef<ReturnType<typeof setInterval> | null>(null);
+  const dirtyRef = useRef(false);  // "脏"标记
+
+  这些定时器 ID 不需要显示在 UI 上，用 useRef 正合适——清理 effect
+  时能拿到最新的 ID，但改了不用重新渲染。
+```
+
+
+
+##  状态管理
+
+https://www.codexlin.com/blog/zustand-quick-start
+
+https://juejin.cn/post/7533418224172548146#heading-13

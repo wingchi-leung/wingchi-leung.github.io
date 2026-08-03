@@ -50,6 +50,46 @@ agent 代码里有大量恢复逻辑（重试、loop 检测、上下文压缩触
 
 ## Tool System
 
+设计了几个原子工具
+
+#### bash
+
+用posix sh语法，window下会先探测git bash 
+
+#### glob
+
+按**文件名/路径**匹配找文件
+
+输入：路径模式 如 src/**/*.ts 
+输出：文件路径列表
+
+### grep
+
+按照文件内容找文件
+
+输入： 正则表达式
+输出：匹配的文件/行/内容
+
+```
+grep: pattern="useState", include="*.tsx"
+→ 返回: 哪些文件匹配，具体是哪一行
+```
+
+### read
+- 支持 `startLine` / `endLine` 精确读取，避免大文件直接塞满上下文 
+- 超长文件自动截断并返回 `[truncated]` 提示，LLM 可感知并追加读取
+
+
+### 工具注册&发现
+
+目前还是硬编码的注册表， 具备三个能力：
+
+- `definitions` — OpenAI 格式的工具 schema，直接传给 LLM
+- `run(name, args, ctx)` — 按名字分发执行
+- `isReadOnly(name)` — 判断工具是否只读（用于 dry-run / 权限控制）
+
+### 读写
+
 工具系统的设计原则之一： 只读工具并行，写操作串行。
 
 `// 先并行跑所有只读工具（read/glob/grep） await Promise.all(readOnlyCalls.map(exec))  // 再串行跑写操作（write/edit/bash） for (const call of writeCalls) await exec(call)`
