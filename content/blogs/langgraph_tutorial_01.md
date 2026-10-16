@@ -45,16 +45,6 @@ def handle_query(query):
                      [保存记录]
 ```
 
-**核心好处：**
-
-| 特性 | 说明 |
-|||
-| **持久化执行** | 失败后从断点恢复，支持长时间运行的任务 |
-| **人机协作** | 在任何点暂停，让人审查/修改，然后继续 |
-| **全栈记忆** | 短期工作记忆 + 长期跨会话记忆 |
-| **可视化调试** | 追踪执行路径，捕获状态转换 |
-| **生产级部署** | 为有状态工作流设计的可扩展基础设施 |
-
 
 **LangGraph** 把多步、有状态、可能分支的 LLM 流程抽象成一张**图（Graph）**：
 
@@ -69,8 +59,6 @@ def handle_query(query):
 
 
 ## 二、LangGraph 是怎么设计的？
-
-### 2.1 核心概念：一起来认识 LangGraph 的图
 
 想象你和同事在实现一个多步骤的智能 Agent。你会遇到这些问题：
 
@@ -94,13 +82,10 @@ LangGraph 的几个核心组件如下：
 - **Graph**：用 Edge 将多个 Node 串成有向图，定义明确的开始节点和可选的结束节点，实现灵活的多步流程。
 
 
-### 2.2 State（状态）
+### State 
 
 **State** 是在节点之间传递的数据结构：每个节点读入当前 state，返回自己对 state 的更新；LangGraph 会把所有节点的更新按规则合并成下一轮 state。
 
-#### 基本定义
-
- 
 ```python
 from typing import Annotated
 from operator import add
@@ -127,9 +112,7 @@ r2 = graph.invoke({"stream": [1, 2, 3]})
 - **方式 1**：普通字段没有 `Annotated`，节点返回的字典会被**覆盖**
 - **方式 2**：用了 `Annotated[类型, reducer]` 的字段，节点返回的值不会直接覆盖，而是和上一轮 state 里的旧值一起交给 **Reducer** 做合并，合并结果再写回 state。
 
-
-
-#### Annotated 是啥意思？
+#### Annotated 
 
 `Annotated[T, x]` 是 Python 语言里的**类型注解**语法，表示类型是 `T`，同时附带元数据 `x`。它并不是 LangGraph 专有，而是 Python 的 typing 模块自 3.9/3.10 起引入的功能，允许你在类型注解里携带一些额外信息用于工具/框架后台的处理。
 
@@ -158,7 +141,7 @@ def foo(x: Annotated[int, "要是正整数"]):
 也就是说：**Reducer 定义了如何把节点输出的增量合并进当前 state**。签名是：`(旧值, 新值) -> 合并结果`。
 
 
-### 2.3 Node（节点）
+### Node（节点）
 
 **Node** 就是图里的一步逻辑：一个函数，接收当前 state（以及可选的 config），干一件事（例如调 LLM、调工具），然后**返回对 state 的更新**（只返回要改的字段即可，不必返回完整 state）。
 
@@ -185,11 +168,11 @@ async def node_with_config(state: MyState, config: RunnableConfig) -> dict:
 - **约定**：节点应该是**无副作用的纯函数**（给定相同 state 得到相同更新），这样图才可重放、可调试；真要写库、发请求，就在节点里做，但逻辑上视为读 state → 算更新 → 返回。
 
 
-### 2.4 Edge（边）
+### Edge 
 
 **Edge** 定义节点之间的流转关系：当前节点跑完后，下一步去哪个节点（或结束）。分两类：**固定边**和**条件边**。
 
-#### 固定边（add_edge）
+#### 固定边 
 
 从 A 到 B 的**固定连线**：A 执行完一定进入 B。
 
@@ -204,7 +187,7 @@ graph.add_edge("agent", "tools")   # agent 结束后一定进入 tools
 graph.add_edge("tools", "agent")   # tools 结束后再回 agent（例如多轮工具调用）
 ```
 
-#### 条件边（add_conditional_edges）
+#### 条件边 
 
 下一个节点**由当前 state 决定**：通过一个路由函数根据 state 返回下一个节点的名字（或 END）。
 
@@ -221,8 +204,7 @@ graph.add_conditional_edges("agent", route_after_agent, {
 })
 ```
 
-
-#### 入口（set_entry_point）
+#### 入口 
 
 指定图从哪个节点开始。
 
@@ -231,10 +213,9 @@ graph.set_entry_point("agent")  # 图从 "agent" 节点开始
 ```
 
 
-### 2.5 Graph（图）
-**Graph** 就是把 State、Node、Edge 拼在一起得到的可执行图：先定义状态和节点，再连边，最后 **compile()** 得到可调用对象（`invoke` / `stream`）。
+### Graph 
+Graph就是把 State、Node、Edge 拼在一起得到的可执行图：先定义状态和节点，再连边，最后 compile() 得到可调用对象（`invoke` / `stream`）。
 
-#### 基本流程
 
 ```python
 from typing import Annotated, TypedDict
@@ -296,7 +277,7 @@ if __name__ == "__main__":
     print("最终 State：", final_state)
 ```
 
-#### 如何实际运行 LangGraph 流程？
+#### 运行 LangGraph 流程 
 
 `invoke`、`ainvoke`、`astream`， `stream`，就是执行我们刚刚编译好的 LangGraph 图的几种常用方式：
 
