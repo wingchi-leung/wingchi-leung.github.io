@@ -417,7 +417,7 @@ PagedAttention 把 KVCache 切成固定大小的“页”（page）
 这个优化不改变 KVCache 的理论大小，但显著提升了**实际可用性**。
 **代表模型/框架**：vLLM、DeepSpeed-MII、HuggingFace TGI。
 
-![[Pasted image 20260619094540.png]]
+![KV Cache 显存瓶颈](/blog_asset/kv-cache-memory-bottleneck.png)
 
 ## Prefill 和 Decode 在工程上的差异
 

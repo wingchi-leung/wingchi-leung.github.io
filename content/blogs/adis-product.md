@@ -1,5 +1,5 @@
 ---
-title: "产品拆解（一）ADIS系统的设计"
+title: "ADIS系统的设计"
 date: "2025-11-06"
 tags: ["Product", "PM"]
 --- 

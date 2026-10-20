@@ -11,7 +11,7 @@ MCP(Model Context Protocol，模型上下文协议)，是一个开放标准，�
 在MCP发布之前，开发者需要为每个AI接入应用编写特定的代码，过程繁琐，MCP出现就如同给AI打造一个USB-C接口，提供了标准化接入方式。   
 
  
-![MCP](/blog_asset/MCP.png)
+![MCP](/blog_asset/mcp.png)
 
 ## MCP 核心组件详解 
 

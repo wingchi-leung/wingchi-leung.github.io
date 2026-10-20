@@ -16,7 +16,7 @@ tags:
 当知识库少于20w个Token（大概500页材料），你可以将整个知识库包含在你给模型的提示中，而无需使用RAG或类似方法
 
 
-![[Pasted image 20260630110148.png]]
+![RAG 流程架构](/blog_asset/rag-pipeline-architecture.png)
 ## 数据预处理
 
 RAG的源数据需要进行严格的数据预处理，保留与业务核心相关的内容。包括：
@@ -212,15 +212,16 @@ Bi-Encoder算出来的向量相似度，本来就离得不远。但一个真正�
 https://golangstar.cn/backend_series/llm_interview/rag_rerank.html 
 
 
-![[Pasted image 20260707142358.png]]
+![RAG 重排序架构](/blog_asset/rag-rerank-architecture.png)
+
+
+ 
 
 
 **Rerank模型的输入到底长什么样？**
 
 - **不只是Query+文本**。输入格式为：`[CLS] 用户问题 [SEP] 文档标题 [SEP] 文档正文前500字符 [SEP]`。
 - 为什么加标题？因为标题往往概括主旨，加入后能显著提升Rerank对文档核心主题的捕获能力。
-
-
 
 
 https://juejin.cn/post/7588733783571824678
@@ -265,5 +266,5 @@ https://blog.csdn.net/qq_41739364/article/details/140091599
 
 Graph RAG是一种知识图谱和传统RAG结合的技术，检索的对象不再是独立的文本块，而是包含实体和关系的图谱，GraphRag的关注重点是图谱的构建和管道。
 
-## Agentic RAG
+ 
 

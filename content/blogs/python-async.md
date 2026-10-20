@@ -258,7 +258,7 @@ https://developer.aliyun.com/article/1262059
 
 FastAPI 的依赖注入机制通过Depends实现
 
-![[Pasted image 20260803164349.png]]
+![FastAPI 依赖注入](/blog_asset/fastapi-dependency-injection.png)
 
 
 ## SQLAlchemy
@@ -269,7 +269,7 @@ SQLAlchemy 是Python中 常用的ORM，SQLAlchemy分成三个部分：
 - DBAPI，数据库驱动
 
 三者关系如下： 
-![[Pasted image 20260803131800.png]] 
+![SQLAlchemy 架构](/blog_asset/sqlalchemy-architecture.png) 
 概念和数据类型
 
 
