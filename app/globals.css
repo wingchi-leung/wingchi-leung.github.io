@@ -498,7 +498,7 @@
   grid-template-columns: minmax(7rem, 0.8fr) minmax(0, 3fr) minmax(8rem, 1fr);
   align-items: baseline;
   gap: var(--gap-columns);
-  padding-block: var(--space-2xs);
+  padding-block: var(--space-md);
   color: var(--color-ink);
   text-decoration: none;
 }
