@@ -413,7 +413,8 @@
 }
 
 .note-sidebar .index-heading {
-  padding-block: var(--space-lg);
+  /* Keep the notes heading on the same baseline and rule as the article index. */
+  padding-block: var(--space-md);
   border-bottom: var(--rule-hair) solid var(--color-rule-2);
 }
 
@@ -482,6 +483,35 @@
 
 .index-heading span {
   color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.post-months {
+  display: grid;
+  gap: var(--space-2xl);
+}
+
+.post-month-group {
+  min-width: 0;
+}
+
+.post-month-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding-block: var(--space-lg) var(--space-sm);
+}
+
+.post-month-heading h3 {
+  color: var(--color-ink);
+  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+  font-weight: 500;
+}
+
+.post-month-heading span {
+  color: var(--color-muted);
+  font-family: var(--font-label);
   font-size: var(--text-sm);
 }
 

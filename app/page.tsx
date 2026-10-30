@@ -12,6 +12,12 @@ interface BlogPost {
   tags: string[];
 }
 
+interface BlogMonth {
+  key: string;
+  label: string;
+  posts: BlogPost[];
+}
+
 async function getBlogPosts(): Promise<BlogPost[]> {
   const blogsDirectory = path.join(process.cwd(), 'content/blogs');
   const filenames = await fs.readdir(blogsDirectory);
@@ -51,9 +57,35 @@ function formatDate(date: string) {
   });
 }
 
+function groupPostsByMonth(blogs: BlogPost[]): BlogMonth[] {
+  const groups = new Map<string, BlogMonth>();
+
+  blogs.forEach((post) => {
+    if (!post.date) {
+      const undated = groups.get('undated') ?? { key: 'undated', label: '未注明日期', posts: [] };
+      undated.posts.push(post);
+      groups.set('undated', undated);
+      return;
+    }
+
+    const date = new Date(post.date);
+    const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+    const month = groups.get(key) ?? {
+      key,
+      label: date.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long' }),
+      posts: [],
+    };
+    month.posts.push(post);
+    groups.set(key, month);
+  });
+
+  return Array.from(groups.values());
+}
+
 export default async function Home() {
   const [blogs, notes] = await Promise.all([getBlogPosts(), getNotes()]);
   const tags = aggregateTags(blogs);
+  const blogMonths = groupPostsByMonth(blogs);
 
   return (
     <div className={`page-shell home-page${notes.length > 0 ? ' home-page-with-notes' : ''}`}>
@@ -64,19 +96,29 @@ export default async function Home() {
               <h2 id="article-index-title">文章</h2>
               <span>{blogs.length} 篇</span>
             </div>
-            <ol className="post-index">
-              {blogs.map((post) => (
-                <li key={post.slug}>
-                  <Link className="post-row" href={`/blog/${post.slug}`}>
-                    <time dateTime={post.date}>{post.date ? formatDate(post.date) : '未注明日期'}</time>
-                    <span className="post-row-title">{post.title}</span>
-                    <span className="post-row-tags" aria-label={post.tags.length ? `标签：${post.tags.join('、')}` : '无标签'}>
-                      {post.tags.slice(0, 2).join(' / ') || '随笔'}
-                    </span>
-                  </Link>
-                </li>
+            <div className="post-months">
+              {blogMonths.map((month) => (
+                <section className="post-month-group" key={month.key} aria-labelledby={`month-${month.key}`}>
+                  <div className="post-month-heading">
+                    <h3 id={`month-${month.key}`}>{month.label}</h3>
+                    <span>{month.posts.length} 篇</span>
+                  </div>
+                  <ol className="post-index">
+                    {month.posts.map((post) => (
+                      <li key={post.slug}>
+                        <Link className="post-row" href={`/blog/${post.slug}`}>
+                          <time dateTime={post.date}>{post.date ? formatDate(post.date) : '未注明日期'}</time>
+                          <span className="post-row-title">{post.title}</span>
+                          <span className="post-row-tags" aria-label={post.tags.length ? `标签：${post.tags.join('、')}` : '无标签'}>
+                            {post.tags.slice(0, 2).join(' / ') || '随笔'}
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ol>
+                </section>
               ))}
-            </ol>
+            </div>
           </section>
 
           {tags.length > 0 && (
