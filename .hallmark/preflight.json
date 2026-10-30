@@ -1,0 +1,32 @@
+{
+  "mode": "redesign",
+  "depth": "full",
+  "genre": "editorial",
+  "theme": "editorial",
+  "routes": ["/", "/blog/[slug]", "/tags/[tag]"],
+  "preserved": [
+    "article content and Markdown rendering",
+    "article and tag routes",
+    "GitHub destination",
+    "heading anchors",
+    "local brand fonts and avatar"
+  ],
+  "introduced": [
+    "index-first article rows",
+    "light-first token system with system dark mode",
+    "state-only editorial motion",
+    "in-flow sticky table of contents with active section tracking"
+  ],
+  "editedFiles": [
+    "app/page.tsx",
+    "app/blog/[slug]/page.tsx",
+    "app/tags/[tag]/page.tsx",
+    "app/layout.tsx",
+    "app/globals.css",
+    "components/Navigation.tsx",
+    "components/RotatingAvatar.tsx",
+    "components/BlogTocSidebar.tsx",
+    "components/BlogTableOfContents.tsx"
+  ],
+  "deletedFiles": []
+}

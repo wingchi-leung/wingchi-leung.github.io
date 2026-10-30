@@ -4,12 +4,9 @@ import type { Metadata } from 'next';
 import matter from 'gray-matter';
 import { Marked } from 'marked';
 import hljs from 'highlight.js';
-import { cn } from '@/lib/utils';
+import Link from 'next/link';
 import { BlogTableOfContents } from '@/components/BlogTableOfContents';
 import { BlogTocSidebar } from '@/components/BlogTocSidebar';
-
-// 与 BlogTocSidebar 展开宽度一致，供服务端布局预留右侧空间（不从未标记 'use client' 的模块导入）
-const BLOG_TOC_RESERVED_WIDTH_PX = 240 + 24;
 
 
 interface BlogPostProps {
@@ -159,32 +156,21 @@ export default async function BlogPost({ params }: BlogPostProps) {
   const post = await getBlogPost(slug);
 
   if (!post) {
-    return <div>Blog post not found</div>;
+    return <div className="page-shell empty-state">文章未找到。</div>;
   }
 
   return (
-    <div className="relative px-4 md:px-8 lg:px-16">
-      {/* 右侧固定目录（大屏显示） */}
-      {post.toc.length > 0 && (
-        <BlogTocSidebar items={post.toc} />
-      )}
+    <div className="page-shell article-shell">
+      <div className={post.toc.length > 0 ? 'article-layout article-layout-with-toc' : 'article-layout'}>
+        {post.toc.length > 0 && <BlogTocSidebar items={post.toc} />}
 
-      {/* 正文区域：有目录时右侧留出空间，避免被遮挡 */}
-      <main
-        className={cn(
-          'mx-auto my-8 max-w-screen-lg',
-          post.toc.length > 0 && 'lg:mr-[var(--blog-toc-width)]'
-        )}
-        style={
-          post.toc.length > 0
-            ? { ['--blog-toc-width' as string]: `${BLOG_TOC_RESERVED_WIDTH_PX}px` }
-            : undefined
-        }
-      >
-        <article>
-          <h1 className="text-2xl md:text-4xl font-bold mb-2">{post.title}</h1>
-          {/* 文章元信息：日期 + 标签 */}
-          <div className="flex flex-wrap items-center gap-3 mb-6 text-sm text-gray-400">
+        <article className="article-main">
+          <header className="article-header">
+            <Link href="/" className="text-link" aria-label="返回文章列表">
+              ← 返回文章列表
+            </Link>
+            <h1>{post.title}</h1>
+            <div className="article-meta">
             {post.date && (
               <time dateTime={post.date}>
                 {new Date(post.date).toLocaleDateString('zh-CN', {
@@ -195,39 +181,32 @@ export default async function BlogPost({ params }: BlogPostProps) {
               </time>
             )}
             {post.tags && post.tags.length > 0 && (
-              <div className="flex flex-wrap gap-1.5">
+              <div className="article-tags" aria-label="文章标签">
                 {post.tags.map((tag) => (
-                  <a
+                  <Link
                     key={tag}
                     href={`/tags/${encodeURIComponent(tag)}`}
-                    className="inline-block text-xs px-2 py-0.5 rounded-full
-                               bg-[rgb(130,115,98)]/10 text-[rgb(130,115,98)]
-                               hover:bg-[rgb(130,115,98)]/20 hover:-translate-y-0.5
-                               transition-all duration-200"
                   >
                     {tag}
-                  </a>
+                  </Link>
                 ))}
               </div>
             )}
-          </div>
-          {/* 小屏：标题下方内联可折叠目录 */}
+            </div>
+          </header>
+
           {post.toc.length > 0 && (
-            <div className="mb-6 max-w-md lg:hidden">
+            <div className="mobile-toc-wrap">
               <BlogTableOfContents items={post.toc} />
             </div>
           )}
+
           <div
-            className="prose prose-sm md:prose-base lg:prose-lg max-w-none
-            prose-headings:font-bold prose-headings:scroll-mt-20
-            prose-p:text-gray-800 
-            prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
-            prose-img:rounded-lg prose-img:mx-auto prose-img:max-w-full prose-img:h-auto"
+            className="article-prose"
             dangerouslySetInnerHTML={{ __html: post.html }}
           />
-          <div className="h-10" />
         </article>
-      </main>
+      </div>
     </div>
   );
 }

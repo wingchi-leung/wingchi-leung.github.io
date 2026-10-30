@@ -2,54 +2,72 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://your-username.github.io</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://your-username.github.io/blog/Claude-code-agent</loc>
-    <lastmod>2026-03-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://your-username.github.io/blog/Claude-Skill101</loc>
+    <loc>https://your-username.github.io/blog/adis-product</loc>
     <lastmod>2025-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://your-username.github.io/blog/Cloudflare-learn</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://your-username.github.io/blog/DevOp</loc>
+    <loc>https://your-username.github.io/blog/agent-engineering-claude-code</loc>
     <lastmod>2026-03-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://your-username.github.io/blog/google-ai-labs</loc>
+    <loc>https://your-username.github.io/blog/agent-engineering-sse</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://your-username.github.io/blog/agent-engineering-tool-calling</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://your-username.github.io/blog/claude-skills</loc>
+    <lastmod>2025-11-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://your-username.github.io/blog/cloudflare</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://your-username.github.io/blog/devops</loc>
+    <lastmod>2026-03-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://your-username.github.io/blog/google-labs</loc>
     <lastmod>2025-03-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://your-username.github.io/blog/langgraph_tutorial_01</loc>
-    <lastmod>2026-02-26</lastmod>
+    <loc>https://your-username.github.io/blog/langgraph-part-1</loc>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://your-username.github.io/blog/MCP101</loc>
+    <loc>https://your-username.github.io/blog/mcp</loc>
     <lastmod>2026-04-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://your-username.github.io/blog/nextJs-full-note</loc>
+    <loc>https://your-username.github.io/blog/nextjs</loc>
     <lastmod>2025-03-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -61,43 +79,37 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://your-username.github.io/blog/PM-practice-ADIS</loc>
-    <lastmod>2025-11-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://your-username.github.io/blog/python-async</loc>
     <lastmod>2026-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://your-username.github.io/blog/RAG101</loc>
+    <loc>https://your-username.github.io/blog/rag</loc>
     <lastmod>2026-03-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://your-username.github.io/blog/SeekHarness开发札记</loc>
-    <lastmod>2026-06-15</lastmod>
+    <loc>https://your-username.github.io/blog/seekharness</loc>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://your-username.github.io/blog/Supabase101</loc>
+    <loc>https://your-username.github.io/blog/supabase</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://your-username.github.io/blog/Transformer101</loc>
+    <loc>https://your-username.github.io/blog/transformer-part-1</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://your-username.github.io/blog/Transformer102</loc>
+    <loc>https://your-username.github.io/blog/transformer-part-2</loc>
     <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

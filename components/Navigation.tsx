@@ -1,60 +1,29 @@
-"use client";
-
-import '../app/globals.css';
-import localFont from 'next/font/local'
+import Link from 'next/link';
+import { Github } from 'lucide-react';
 import RotatingAvatar from './RotatingAvatar';
-
-const bubbleboddy = localFont({
-  src: '../public/fonts/bubble-inlie.ttf',
-  display: 'swap',
-})
-
-const agrandirNarrow = localFont({
-  src: '../public/fonts/agrandir-narrow.otf',
-  display: 'swap',
-})
 
 export default function Navigation() {
   return (
-    <nav
-      className="py-4 px-4 md:px-6 mb-8 relative"  
-      style={{
-        backgroundColor: 'rgb(250,249,245)',
-      }}
-    >
-      <div
-        className="flex flex-col items-center md:flex-row md:justify-center w-full relative"
-      >
-        {/* 头像容器 */}
-        <div className="nav-avatar">
+    <header className="site-header">
+      <nav className="site-nav" aria-label="主导航">
+        <div className="nav-identity">
           <RotatingAvatar />
+          <Link href="/" className="brand-link" aria-label="路边广播首页">
+            <span className="brand-wordmark">Wingchi</span>
+            <span className="brand-line">Coding, writing and shipping</span>
+          </Link>
         </div>
-        
-        <div
-          className={`text-4xl md:text-6xl font-bold text-center mb-4 md:mb-0 ${bubbleboddy.className}`}
-          style={{
-            color: 'rgb(171, 155, 137)',
-
-          }}
+        <a
+          className="github-link"
+          href="https://github.com/wingchi-leung"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="在 GitHub 查看 Wingchi"
         >
-          Wingchi
-        </div>
-        <div
-          className="flex flex-col items-center md:items-start md:ml-8"
-        >
-          <div
-            className={`text-xl md:text-3xl font-bold text-center md:text-left ${agrandirNarrow.className}`}
-            style={{
-              color: 'rgb(171, 155, 137)',
-              fontStyle: 'italic',
-              lineHeight: '1.2',
-            }}
-          >
-            Coding, Writing and Shipping
-          </div>
-        </div>
-      </div>
-      
-    </nav>
+          <Github aria-hidden="true" size={20} strokeWidth={1.8} />
+          <span>GitHub</span>
+        </a>
+      </nav>
+    </header>
   );
 }

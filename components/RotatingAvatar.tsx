@@ -1,28 +1,17 @@
-"use client";
+'use client';
 
+import Image from 'next/image';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 export default function RotatingAvatar() {
   const pathname = usePathname();
-  
-  if (pathname !== '/') {
-    return null;
-  }
+
+  if (pathname !== '/') return null;
 
   return (
-    <div className="avatar-container">
-      <div className="avatar-glow"></div>
-      <div className="avatar-wrapper">
-        <img
-          src="/bigjump.jpg"
-          alt="Profile"
-          className="avatar-image"
-        />
-        <div className="avatar-border"></div>
-      </div>
-      <div className="avatar-tooltip">
-        <span className="tooltip-text">👋 你好，我是 Wingchi</span>
-      </div>
-    </div>
+    <Link href="/" className="avatar-link" aria-label="返回路边广播首页">
+      <Image src="/bigjump.jpg" alt="Wingchi" width={44} height={44} priority />
+    </Link>
   );
 }

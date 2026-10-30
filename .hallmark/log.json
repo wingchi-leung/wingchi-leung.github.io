@@ -1,0 +1,21 @@
+[
+  {
+    "mode": "redesign",
+    "depth": "full",
+    "scope": "site",
+    "shape": "Index-first",
+    "theme": "editorial",
+    "axes": ["left-biased", "type-led", "ruled", "dense-index", "restrained", "state-motion"],
+    "hero": "Index",
+    "nav": "masthead",
+    "footer": "tag index",
+    "imagery": "user avatar only",
+    "photos": [],
+    "entry": "article index",
+    "fingerprint": "index/type/ruled/asymmetric/flat/state",
+    "sections": ["masthead", "index hero", "article rows", "tag index"],
+    "signature": "ruled article titles with a printer-green underline on interaction",
+    "waived": [],
+    "prompt": "personal blog article index and longform reading"
+  }
+]
