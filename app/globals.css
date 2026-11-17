@@ -242,8 +242,13 @@
   }
 
   ::selection {
-    background: var(--color-accent-soft);
-    color: var(--color-ink);
+    background: rgb(0 0 0);
+    color: rgb(255 255 255);
+  }
+
+  ::-moz-selection {
+    background: rgb(0 0 0);
+    color: rgb(255 255 255);
   }
 }
 
@@ -792,6 +797,27 @@
 .article-prose ol,
 .article-prose blockquote {
   margin-block: 1.5em;
+}
+
+.article-prose ul,
+.article-prose ol {
+  padding-inline-start: 1.5em;
+}
+
+.article-prose ul {
+  list-style: disc;
+}
+
+.article-prose ol {
+  list-style: decimal;
+}
+
+.article-prose ul ul {
+  list-style: circle;
+}
+
+.article-prose ul ul ul {
+  list-style: square;
 }
 
 .article-prose h2,
