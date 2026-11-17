@@ -842,7 +842,7 @@
 
 .article-prose h3 {
   margin-top: 2.25em;
-  border-inline-start: 2px solid #2f8f5b;
+  border-inline-start: 8px solid #14532d;
   color: var(--color-ink-2);
   font-size: var(--text-title);
   font-weight: 700;
